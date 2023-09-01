@@ -30,3 +30,4 @@ bin/
 
 ### private Data ###
 *.csv
+/src/main/kotlin/csv/
