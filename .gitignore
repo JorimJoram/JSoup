@@ -29,5 +29,5 @@ bin/
 .DS_Store
 
 ### private Data ###
-/src/main/kotlin/csv
+/src/main/kotlin/csv/**
 /src/main/kotlin/csv/table_data.csv
