@@ -4,30 +4,27 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 
-class CrawlingGameoneTeam{
-    fun crawlingTeam(teamURL:String): String{
-        var result= ""
-        try{
-            val doc:Document = Jsoup.connect(teamURL).get()
-            val tables: List<Element> = doc.select("table")
-
-            for(table in tables){
-                result += table.select(".fixed")
+class CrawlingGameoneTeam(
+    private var teamURL: String
+){
+    fun crawlingTeam(): String{
+        return try{
+            val doc:Document = Jsoup.connect(this.teamURL).get()
+            val tables:List<Element> = doc.select("table")
+            tables.joinToString(separator = ""){ //각 테이블의 내용을 하나의 문자열로 연결
+                table -> table.select(".fixed").toString()
             }
-        }catch (e:Exception){
-            result = "none"
-        }
-        finally {
+        }catch(e:Exception){
+            "none"
+        }finally{
             println("Crawling Fin")
         }
-
-        return result
     }
 
-    fun  crawlingTeamTableOptions(teamURL: String):String {
+    fun crawlingTeamTableOptions():String {
         var result = ""
         try {
-            val doc: Document = Jsoup.connect(teamURL).get()
+            val doc: Document = Jsoup.connect(this.teamURL).get()
             val tables: List<Element> = doc.select("table")
             for (tr in getTrsInTable(tables)) {
                 result += tr.select("td").text()
@@ -45,10 +42,10 @@ class CrawlingGameoneTeam{
         return trs
     }
 
-    fun crawlingTeamSpan(teamURL: String):String{
+    fun crawlingTeamSpan():String{
         var result = ""
         try{
-            val doc:Document = Jsoup.connect(teamURL).get()
+            val doc:Document = Jsoup.connect(this.teamURL).get()
             val spans : List<Element> = doc.select("span")
             for(span in spans){
                 result += span.text()
