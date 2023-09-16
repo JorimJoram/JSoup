@@ -1,12 +1,11 @@
 package gameone
 
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
 import java.io.BufferedWriter
 import java.io.FileWriter
 import java.lang.StringBuilder
 
-class loadAndCsv(
+class LoadAndCsv(
     private var teamURL:String
 ) {
     fun loadAndCsv(){
